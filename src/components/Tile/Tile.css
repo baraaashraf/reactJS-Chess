@@ -1,0 +1,19 @@
+.square {
+    width: 100px;
+    height: 100px;
+    display: grid;
+    place-content: center;
+  }
+  
+
+.light-square {
+  background-color: #f8f0dd;
+}
+
+.dark-square {
+  background-color: #285269;
+}
+
+.piece-img{
+    width: 90px;
+}
