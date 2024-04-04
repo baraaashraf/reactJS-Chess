@@ -9,8 +9,9 @@ interface Props {
 const Tile = ({ number, image }: Props) => {
     return (
         <div className={`square  ${number % 2 === 1 ? "light-square" : "dark-square"}`}>
-            <img className={'piece-img'} src={image} alt="" />
-        </div>)
+            {image && <div className={'chess-piece'} style={{ backgroundImage: `url(${image})` }}></div>}
+        </div>
+    )
 }
 
 export default Tile
