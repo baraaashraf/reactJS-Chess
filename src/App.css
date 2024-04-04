@@ -1,6 +1,12 @@
+body,
+html {
+  background-color: #302e2b;
+}
+
 .App {
   display: grid;
   place-content: center;
-  height: 100vh;
+  height: 100dvh;
+  width: 100dvw;
   background-color: #302e2b;
 }
