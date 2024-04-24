@@ -8,6 +8,23 @@ export default class Referee {
   tileIsOccupied(x: number, y: number, boardState: Piece[]): boolean {
     const piece = boardState.find((p) => p.x === x && p.y === y);
     if (piece) {
+      console.log("Tile is occupied...");
+
+      return true;
+    }
+    return false;
+  }
+
+  tileIsOccupiedByOpponent(
+    x: number,
+    y: number,
+    boardState: Piece[],
+    team: TeamType
+  ): boolean {
+    const piece = boardState.find(
+      (p) => p.x === x && p.y === y && p.team !== team
+    );
+    if (piece) {
       return true;
     }
     return false;
@@ -28,6 +45,7 @@ export default class Referee {
         piece type:  ${type} ___ ${team}
     `);
 
+    /// Move Logic
     if (type === PieceType.PAWN) {
       const startingRow = team === TeamType.OUR ? 1 : 6;
       const pawnDirection = team === TeamType.OUR ? 1 : -1;
@@ -41,6 +59,18 @@ export default class Referee {
         }
       } else if (px === cx && cy - py === pawnDirection) {
         if (!this.tileIsOccupied(cx, cy, boardState)) {
+          return true;
+        }
+      }
+      /// Capture Logic
+      else if (cx - px === -1 && cy - py === pawnDirection) {
+        if (this.tileIsOccupiedByOpponent(cx, cy, boardState, team)) {
+          console.log("left enem pieceeee...");
+          return true;
+        }
+      } else if (cx - px === 1 && cy - py === pawnDirection) {
+        if (this.tileIsOccupiedByOpponent(cx, cy, boardState, team)) {
+          console.log("right pieceeee...");
           return true;
         }
       }
