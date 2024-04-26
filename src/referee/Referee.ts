@@ -1,12 +1,10 @@
-import {
-  PieceType,
-  TeamType,
-  Piece,
-} from "../Constants";
+import { PieceType, TeamType, Piece, Position } from "../Constants";
 
 export default class Referee {
   tileIsOccupied(x: number, y: number, boardState: Piece[]): boolean {
-    const piece = boardState.find((p) => p.position.x === x && p.position.y === y);
+    const piece = boardState.find(
+      (p) => p.position.x === x && p.position.y === y
+    );
     if (piece) {
       console.log("Tile is occupied...");
 
@@ -31,10 +29,8 @@ export default class Referee {
   }
 
   isEnPassantMove(
-    px: number,
-    py: number,
-    cx: number,
-    cy: number,
+    ps: Position,
+    cs: Position,
     type: PieceType,
     team: TeamType,
     boardState: Piece[]
@@ -42,9 +38,12 @@ export default class Referee {
     const pawnDirection = team === TeamType.OUR ? 1 : -1;
 
     if (type === PieceType.PAWN) {
-      if ((cx - px === -1 || cx - px === 1) && cy - py === pawnDirection) {
+      if ((cs.x - ps.x === -1 || cs.x - ps.x === 1) && cs.y - ps.y === pawnDirection) {
         const piece = boardState.find(
-          (p) => p.position.x === cx && p.position.y === cy - pawnDirection && p.enPassant
+          (p) =>
+            p.position.x === cs.x &&
+            p.position.y === cs.y - pawnDirection &&
+            p.enPassant
         );
         if (piece) {
           return true;
@@ -56,17 +55,15 @@ export default class Referee {
   }
 
   isValidMove(
-    px: number,
-    py: number,
-    cx: number,
-    cy: number,
+    ps: Position,
+    cs: Position,
     type: PieceType,
     team: TeamType,
     boardState: Piece[]
   ) {
     console.log(`
-        previous squares: ${px} - ${py}
-        current squares:  ${cx} - ${cy}
+        previous squares: ${ps.x} - ${ps.y}
+        current squares:  ${cs.x} - ${cs.y}
         piece type:  ${type} ___ ${team}
     `);
 
@@ -75,26 +72,26 @@ export default class Referee {
       const startingRow = team === TeamType.OUR ? 1 : 6;
       const pawnDirection = team === TeamType.OUR ? 1 : -1;
 
-      if (px === cx && py === startingRow && cy - py === 2 * pawnDirection) {
+      if (ps.x === cs.x && ps.y === startingRow && cs.y - ps.y === 2 * pawnDirection) {
         if (
-          !this.tileIsOccupied(cx, cy, boardState) &&
-          !this.tileIsOccupied(cx, cy - pawnDirection, boardState)
+          !this.tileIsOccupied(cs.x, cs.y, boardState) &&
+          !this.tileIsOccupied(cs.x, cs.y - pawnDirection, boardState)
         ) {
           return true;
         }
-      } else if (px === cx && cy - py === pawnDirection) {
-        if (!this.tileIsOccupied(cx, cy, boardState)) {
+      } else if (ps.x === cs.x && cs.y - ps.y === pawnDirection) {
+        if (!this.tileIsOccupied(cs.x, cs.y, boardState)) {
           return true;
         }
       }
       /// Capture Logic
-      else if (cx - px === -1 && cy - py === pawnDirection) {
-        if (this.tileIsOccupiedByOpponent(cx, cy, boardState, team)) {
+      else if (cs.x - ps.x === -1 && cs.y - ps.y === pawnDirection) {
+        if (this.tileIsOccupiedByOpponent(cs.x, cs.y, boardState, team)) {
           console.log("left enem pieceeee...");
           return true;
         }
-      } else if (cx - px === 1 && cy - py === pawnDirection) {
-        if (this.tileIsOccupiedByOpponent(cx, cy, boardState, team)) {
+      } else if (cs.x - ps.x === 1 && cs.y - ps.y === pawnDirection) {
+        if (this.tileIsOccupiedByOpponent(cs.x, cs.y, boardState, team)) {
           console.log("right pieceeee...");
           return true;
         }
