@@ -2,11 +2,11 @@ import {
   PieceType,
   TeamType,
   Piece,
-} from "../components/Chessboard/Chessboard";
+} from "../Constants";
 
 export default class Referee {
   tileIsOccupied(x: number, y: number, boardState: Piece[]): boolean {
-    const piece = boardState.find((p) => p.x === x && p.y === y);
+    const piece = boardState.find((p) => p.position.x === x && p.position.y === y);
     if (piece) {
       console.log("Tile is occupied...");
 
@@ -22,11 +22,36 @@ export default class Referee {
     team: TeamType
   ): boolean {
     const piece = boardState.find(
-      (p) => p.x === x && p.y === y && p.team !== team
+      (p) => p.position.x === x && p.position.y === y && p.team !== team
     );
     if (piece) {
       return true;
     }
+    return false;
+  }
+
+  isEnPassantMove(
+    px: number,
+    py: number,
+    cx: number,
+    cy: number,
+    type: PieceType,
+    team: TeamType,
+    boardState: Piece[]
+  ) {
+    const pawnDirection = team === TeamType.OUR ? 1 : -1;
+
+    if (type === PieceType.PAWN) {
+      if ((cx - px === -1 || cx - px === 1) && cy - py === pawnDirection) {
+        const piece = boardState.find(
+          (p) => p.position.x === cx && p.position.y === cy - pawnDirection && p.enPassant
+        );
+        if (piece) {
+          return true;
+        }
+      }
+    }
+
     return false;
   }
 
