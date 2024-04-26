@@ -38,7 +38,10 @@ export default class Referee {
     const pawnDirection = team === TeamType.OUR ? 1 : -1;
 
     if (type === PieceType.PAWN) {
-      if ((cs.x - ps.x === -1 || cs.x - ps.x === 1) && cs.y - ps.y === pawnDirection) {
+      if (
+        (cs.x - ps.x === -1 || cs.x - ps.x === 1) &&
+        cs.y - ps.y === pawnDirection
+      ) {
         const piece = boardState.find(
           (p) =>
             p.position.x === cs.x &&
@@ -72,7 +75,11 @@ export default class Referee {
       const startingRow = team === TeamType.OUR ? 1 : 6;
       const pawnDirection = team === TeamType.OUR ? 1 : -1;
 
-      if (ps.x === cs.x && ps.y === startingRow && cs.y - ps.y === 2 * pawnDirection) {
+      if (
+        ps.x === cs.x &&
+        ps.y === startingRow &&
+        cs.y - ps.y === 2 * pawnDirection
+      ) {
         if (
           !this.tileIsOccupied(cs.x, cs.y, boardState) &&
           !this.tileIsOccupied(cs.x, cs.y - pawnDirection, boardState)
@@ -96,8 +103,44 @@ export default class Referee {
           return true;
         }
       }
+    } else if (type === PieceType.KNIGHT) {
+      //TO THE TOP
+      if(cs.y - ps.y === 2){
+        if(cs.x - ps.x === -1){
+          console.log("Top left knight move")
+        }
+        if(cs.x - ps.x === 1){
+          console.log("Top right knight move")
+        }
+      }
+      //TO THE RIGHT
+      if(cs.x - ps.x === 2){
+        if(cs.y - ps.y === 1){
+          console.log("right top knight move")
+        }
+        if(cs.y - ps.y === -1){
+          console.log("right bottom knight move")
+        }
+      }
+      //TO THE BOTTOM
+      if(cs.y - ps.y === -2){
+        if(cs.x - ps.x === -1){
+          console.log("Bottom left knight move")
+        }
+        if(cs.x - ps.x === 1){
+          console.log("Bottom right knight move")
+        }
+      }
+      //TO THE LEFT
+      if(cs.x - ps.x === -2){
+        if(cs.y - ps.y === 1){
+          console.log("left top knight move")
+        }
+        if(cs.y - ps.y === -1){
+          console.log("Left bottom knight move")
+        }
+      }
     }
-
     return false;
   }
 }
