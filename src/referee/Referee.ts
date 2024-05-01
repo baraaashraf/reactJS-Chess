@@ -289,6 +289,17 @@ export default class Referee {
     return false;
   }
 
+  queenMove(ps: Position, cs: Position, team: TeamType, boardState: Piece[]):boolean {
+    return (
+      this.bishopMove(ps, cs, team, boardState) ||
+      this.rookMove(ps, cs, team, boardState)
+    );
+  }
+
+  kingMove(ps: Position, cs: Position, team: TeamType, boardState: Piece[]):boolean {
+    return true
+  }
+
   isValidMove(
     ps: Position,
     cs: Position,
@@ -316,9 +327,10 @@ export default class Referee {
         console.log("ROOK");
         break;
       case PieceType.QUEEN:
-        validMove =
-          this.rookMove(ps, cs, team, boardState) ||
-          this.bishopMove(ps, cs, team, boardState);
+        validMove = this.queenMove(ps, cs, team, boardState);
+        break;
+      case PieceType.KING:
+        validMove = this.kingMove(ps, cs, team, boardState);
     }
 
     return validMove;
