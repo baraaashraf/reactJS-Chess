@@ -289,15 +289,47 @@ export default class Referee {
     return false;
   }
 
-  queenMove(ps: Position, cs: Position, team: TeamType, boardState: Piece[]):boolean {
+  queenMove(
+    ps: Position,
+    cs: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
     return (
       this.bishopMove(ps, cs, team, boardState) ||
       this.rookMove(ps, cs, team, boardState)
     );
   }
 
-  kingMove(ps: Position, cs: Position, team: TeamType, boardState: Piece[]):boolean {
-    return true
+  kingMove(
+    ps: Position,
+    cs: Position,
+    team: TeamType,
+    boardState: Piece[]
+  ): boolean {
+    for (let i = 1; i < 2; i++) {
+      //Diagonal
+      let multiplierX = cs.x < ps.x ? -1 : cs.x > ps.x ? 1 : 0;
+      let multiplierY = cs.y < ps.y ? -1 : cs.y > ps.y ? 1 : 0;
+
+      let passedPosition: Position = {
+        x: ps.x + i * multiplierX,
+        y: ps.y + i * multiplierY,
+      };
+
+      if (samePosition(passedPosition, cs)) {
+        if (
+          this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)
+        ) {
+          return true;
+        }
+      } else {
+        if (this.tileIsOccupied(passedPosition, boardState)) {
+          break;
+        }
+      }
+    }
+    return false;
   }
 
   isValidMove(
