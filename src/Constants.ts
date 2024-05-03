@@ -11,11 +11,13 @@ import blackbishop from "./assets/images/bB.png";
 import whiteknight from "./assets/images/wN.png";
 import blackknight from "./assets/images/bN.png";
 
-import whiteking from "./assets/images/wK.png";
-import blackking from "./assets/images/bK.png";
 
 import whitequeen from "./assets/images/wQ.png";
 import blackqueen from "./assets/images/bQ.png";
+
+
+import whiteking from "./assets/images/wK.png";
+import blackking from "./assets/images/bK.png";
 
 export const horizontalAxis = ["a", "b", "c", "d", "e", "f", "g", "h"];
 export const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
