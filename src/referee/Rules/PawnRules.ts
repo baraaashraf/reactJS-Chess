@@ -40,3 +40,10 @@ export const pawnMove = (
   }
   return false;
 };
+
+export const GetPossiblePawnMoves = (
+  piece: Piece,
+  boardState: Piece[]
+): Position[] => {
+  return [];
+};
