@@ -1,10 +1,9 @@
 .square {
-    width: 100px;
-    height: 100px;
-    display: grid;
-    place-content: center;
-  }
-  
+  width: 100px;
+  height: 100px;
+  display: grid;
+  place-content: center;
+}
 
 .light-square {
   background-color: #f8f0dd;
@@ -14,17 +13,25 @@
   background-color: #285269;
 }
 
-.chess-piece{
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 90px;
+
+.chess-piece {
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90px;
 }
 
-.chess-piece:hover{
+.chess-piece:hover {
   cursor: grab;
 }
-.chess-piece:active{
+.chess-piece:active {
   cursor: grabbing;
 }
+/* .tile-highlight::before {
+  content: " ";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: (0,0,0,0.8);
+} */

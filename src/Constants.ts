@@ -11,10 +11,8 @@ import blackbishop from "./assets/images/bB.png";
 import whiteknight from "./assets/images/wN.png";
 import blackknight from "./assets/images/bN.png";
 
-
 import whitequeen from "./assets/images/wQ.png";
 import blackqueen from "./assets/images/bQ.png";
-
 
 import whiteking from "./assets/images/wK.png";
 import blackking from "./assets/images/bK.png";
@@ -52,6 +50,7 @@ export interface Piece {
   type: PieceType;
   team: TeamType;
   enPassant?: boolean;
+  possibleMoves?: Position[];
 }
 
 export const initialBoardState: Piece[] = [];

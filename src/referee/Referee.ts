@@ -76,15 +76,11 @@ export default class Referee {
     return validMove;
   }
 
-  getValidMode(piece: Piece, boardState: Piece[]): Position[] {
-    switch (piece.type) {
+  getValidMoves(piece: Piece, boardState: Piece[]) : Position[] {
+    switch(piece.type)
+    {
       case PieceType.PAWN:
         return GetPossiblePawnMoves(piece, boardState);
-      case PieceType.BISHOP:
-      case PieceType.KNIGHT:
-      case PieceType.ROOK:
-      case PieceType.KING:
-      case PieceType.QUEEN:
       default:
         return [];
     }
