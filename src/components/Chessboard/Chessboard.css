@@ -42,11 +42,3 @@
   border-radius: 20px;
 }
 
-.tile-highlight::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: (50, 50, 50, 0.4);
-  z-index: 5;
-}

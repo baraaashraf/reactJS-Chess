@@ -13,7 +13,6 @@
   background-color: #285269;
 }
 
-
 .chess-piece {
   width: 100px;
   height: 100px;
@@ -28,10 +27,23 @@
 .chess-piece:active {
   cursor: grabbing;
 }
-/* .tile-highlight::before {
-  content: " ";
-  width: 20px;
-  height: 20px;
+
+.tile-highlight:not(.chess-piece-square)::before {
+  content: "";
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: (0,0,0,0.8);
-} */
+  background-color: rgba(50, 50, 50, 0.4);
+  z-index: 5;
+}
+
+.tile-highlight.chess-piece-square::before {
+  position: absolute;
+  border: 5px solid rgba(50, 50, 50, 0.4);
+  margin: auto;
+  content: "";
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  z-index: 5;
+}
